@@ -6,17 +6,18 @@
         <meta name="viewport" content="width=device-width, intial-scale=1.0">
         <title>Game of 24</title>
         <link rel="stylesheet" href="gameOf24.css">
+        <script src="https://cdn.jsdelivr.net/npm/mathjs@13.0.0/lib/browser/math.min.js"></script>
         <script src="timedMode.js"></script>
     </head>
 
     <body>
         <h2>Given Cards:</h2>
         <div >
-            <input id="input" />
+            <input id="input" type="text" / >
         </div>
         <div id="given-cards">
-            <button onclick="getCards();">Try</button>
-            <image src="https://deckofcardsapi.com/static/img/2H.png" />
+            <script>getCards()</script>
         </div>
+        <button onclick="checkGuess();">Try</button>
     </body>
 </html>
