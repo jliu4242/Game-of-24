@@ -18,3 +18,13 @@ input {
     border: '1px solid #ccc';
     width: '100%';
 }
+
+#score-section {
+    font-family: Arial, sans-serif;
+    font-size: 50px;
+    color: #5D3FD3; 
+}
+
+#timer-section {
+    
+}

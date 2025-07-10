@@ -11,13 +11,23 @@
     </head>
 
     <body>
+        <div id="score-section">
+            <h2>Points</h2>
+            <p>Score: <span id='score'>0</span></p>
+        </div>
+
         <h2>Given Cards:</h2>
         <div >
-            <input id="input" type="text" / >
+            <input id="input" type="text" />
         </div>
         <div id="given-cards">
             <script>getCards()</script>
         </div>
         <button onclick="checkGuess();">Try</button>
+        <button onclick='checkCombination();'>Impossible</button>
+
+        <div id="timer-section">
+            <p>Time: <span id='timer'>0</span></p>
+        </div>
     </body>
 </html>

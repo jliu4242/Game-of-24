@@ -1,9 +1,10 @@
 
 let numbers = [];
 
-const suits = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "0", "J", "Q", "K"];
-const values = ["C", "D", "H", "S"];
+const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "0", "J", "Q", "K"];
+const suits = ["C", "D", "H", "S"];
 
+let score = 0;
 
 // Function to generate random set of 4 cards each time
 function getCards() {
@@ -15,14 +16,14 @@ function getCards() {
     });
 
     numbers.length = 0;
-
+ 
     for (let i = 0;i < 4;i++) {
         const suit = suits[Math.floor(Math.random() * suits.length)];
         const value = values[Math.floor(Math.random() * values.length)];
 
-        cardCode = suit + value;
+        cardCode = value + suit;
 
-        switch (suit) {
+        switch (value) {
             case 'A':
                 numbers.push(1);
                 break;
@@ -36,14 +37,12 @@ function getCards() {
                 numbers.push(13);
                 break;
             default:
-                numbers.push(Number(suit));
+                numbers.push(Number(value));
         }
 
         let img = document.createElement("img");
         img.src = `https://deckofcardsapi.com/static/img/${cardCode}.png`
         document.getElementById('given-cards').appendChild(img);
-
-        console.log(numbers[i]);
     }
 }
 
@@ -55,10 +54,11 @@ function checkGuess() {
 
     if (guessedNumbers.sort().join(',') === numbers.sort().join(',')) {
         const result = math.evaluate(guess);
-        if (result == 24) {
+        if (Math.abs(result) < 1e-3) {
+            addScore();
             getCards();
         } else {
-            // 
+            wrongAnswer();
         }
     } else {
         // Produce error comment
@@ -72,4 +72,54 @@ function extractIntegers(guess) {
     const integers = matches.map(Number);
 
     return integers;
+}
+
+function addScore() {
+    score += 100;
+    document.getElementById('score').textContent = score;
+}
+
+function wrongAnswer() {
+    score -= 50;
+    document.getElementById('score').textContent = score;
+}
+
+function minusScore() {
+    score -= 20;
+    document.getElementById('score').textContent = score;
+}
+
+function checkCombination() {
+    if (checkValidCombination()) {
+        minusScore();
+        getCards();
+    } else {
+        getCards();
+    }
+}
+
+function checkValidCombination() {
+    let validCombination = false;
+    console.log("Checking combination for:", numbers);
+    
+    const ops = [(a, b) => a + b, (a, b) => a - b, (a, b) => b - a, (a, b) => a * b, (a, b) => a / b, (a, b) => b / a];
+    const judgePoint24 = (numbers, [a, b, c, d] = numbers) => {
+        switch (numbers.length) {
+            case 4:
+                return [[a, b, c, d], [a, c, b, d], [a, d, c, b], [b, c, a, d], [b, d, a, c], [c, d, a, b]]
+                    .some(([w, x, y, z]) => ops.some(f => judgePoint24([f(w, x), y, z])));
+            case 3:
+                return [[a, b, c], [b, c, a], [a, c, b]].some(([x, y, z]) => ops.some(f => judgePoint24([f(x, y), z])));
+            case 2:
+                return ops.some(f => judgePoint24([f(a, b)]));
+            default:
+                return Math.abs(a - 24) < 1e-3;
+        }
+    };
+
+    if (judgePoint24(numbers)) {
+        return true;
+    } else {
+        return false;
+    }
 }
