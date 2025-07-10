@@ -123,3 +123,18 @@ function checkValidCombination() {
         return false;
     }
 }
+
+function startTimer() {
+    var seconds = 5;
+    const countdown = setInterval (function () {
+        seconds--;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        document.getElementById('timer').textContent = seconds;
+
+        if (seconds <= 0) {
+            // end game
+            clearInterval(countdown);
+        }
+    }, 1000)
+}
