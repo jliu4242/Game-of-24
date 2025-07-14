@@ -8,12 +8,7 @@ let score = 0;
 
 // Function to generate random set of 4 cards each time
 function getCards() {
-    const targetDiv = document.getElementById('given-cards');
-    const images = targetDiv.querySelectorAll('img');
-
-    images.forEach(img => {
-        img.remove();
-    });
+    removeImages();
 
     numbers.length = 0;
  
@@ -54,7 +49,7 @@ function checkGuess() {
 
     if (guessedNumbers.sort().join(',') === numbers.sort().join(',')) {
         const result = math.evaluate(guess);
-        if (Math.abs(result) < 1e-3) {
+        if (Math.abs(result - 24) < 1e-3) {
             addScore();
             getCards();
         } else {
@@ -87,6 +82,15 @@ function wrongAnswer() {
 function minusScore() {
     score -= 20;
     document.getElementById('score').textContent = score;
+}
+
+function removeImages() {
+    const targetDiv = document.getElementById('given-cards');
+    const images = targetDiv.querySelectorAll('img');
+
+    images.forEach(img => {
+        img.remove();
+    });
 }
 
 function checkCombination() {
@@ -125,16 +129,54 @@ function checkValidCombination() {
 }
 
 function startTimer() {
-    var seconds = 5;
+    var seconds = 60;
+
+    // remove start game button
+    const targetButton = document.getElementById('start-game');
+    targetButton.remove();
+
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    document.getElementById('timer').textContent = seconds;
+
     const countdown = setInterval (function () {
         seconds--;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-
         document.getElementById('timer').textContent = seconds;
 
         if (seconds <= 0) {
             // end game
             clearInterval(countdown);
+            changeContent();
         }
     }, 1000)
 }
+
+function changeContent() {
+    // remove card images
+    removeImages();
+
+    removeElement('cards-header');
+    removeElement('input');
+    removeElement('guess-button');
+    removeElement('impossible-button');
+
+    const scoreBar = document.createElement('div');
+    scoreBar.id = 'scoreContainer';
+    scoreBar.textContent = "Score: " + score;
+    scoreBar.innerHTML += '<br>'
+    scoreBar.classList.add('scorebar-style');
+    document.body.appendChild(scoreBar);
+
+    const tryAgain = document.createElement('a');
+    tryAgain.textContent = "try again";
+    tryAgain.href = "page.html";
+    tryAgain.classList.add('tryAgainLink')
+    const parentDiv = document.getElementById('scoreContainer')
+    parentDiv.appendChild(tryAgain);
+}
+
+function removeElement(elementID) {
+    const target = document.getElementById(elementID);
+    target.remove();
+}
+

@@ -45,3 +45,18 @@ input {
     width: 100px;
     font-size: 20px;
 }
+
+.scorebar-style {
+    width:100%;
+    background: #ececec40;
+    height:100px;
+    font-size: 50px;
+    position: relative;
+    top: 150px;
+}
+
+.tryAgainLink {
+    font-size: 20px;
+    position: relative;
+    top: -20px;
+}

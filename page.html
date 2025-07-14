@@ -26,7 +26,7 @@
             <button class='start-button' onclick="startTimer();">Start Game</button>
         </div>
 
-        <h2>Given Cards:</h2>
+        <h2 id="cards-header">Given Cards:</h2>
         <div id="given-cards">
             <script>getCards()</script>
         </div>
@@ -37,10 +37,9 @@
         </div>
 
         <div id="guess-buttos">
-            <button onclick="checkGuess();">Try</button>
-            <button onclick='checkCombination();'>Impossible</button>
+            <button id='guess-button' onclick="checkGuess();">Guess</button>
+            <button id='impossible-button' onclick='checkCombination();'>Impossible</button>
         </div>
 
-        <br />
     </body>
 </html>
