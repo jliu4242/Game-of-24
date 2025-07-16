@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, intial-scale=1.0">
+        <title>Your Score</title>
+        <link rel="stylesheet" href="gameOf24.css">
+        <script src="https://cdn.jsdelivr.net/npm/mathjs@13.0.0/lib/browser/math.min.js"></script>
+        <script src="timedMode.js"></script>
+    </head>
+
+    <div class="form">
+        <form>
+            <body>
+                <label for="duration">Duration:</label>
+                <select id="duration" name="duration">
+                    <option value="30">30</option>
+                    <option value="60">60</option>
+                    <option value="120">120</option>
+                </select>
+            </body>
+
+        </form>
+
+        <button id='startGame'>Start Game</button>
+        <script>
+            localStorage.setItem('timedDuration', document.getElementById('duration').value);
+            document.getElementById('startGame').onclick = function () {
+                location.href='timedModePage.html';
+            };
+        </script>
+    </div>
+</html>

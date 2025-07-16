@@ -6,6 +6,7 @@ const suits = ["C", "D", "H", "S"];
 
 let score = 0;
 
+
 // Function to generate random set of 4 cards each time
 function getCards() {
     removeImages();
@@ -129,11 +130,8 @@ function checkValidCombination() {
 }
 
 function startTimer() {
-    var seconds = 60;
-
-    // remove start game button
-    const targetButton = document.getElementById('start-game');
-    targetButton.remove();
+    var seconds = localStorage.getItem('timedDuration');
+    console.log(seconds);
 
     seconds = seconds < 10 ? "0" + seconds : seconds;
     document.getElementById('timer').textContent = seconds;
@@ -169,7 +167,7 @@ function changeContent() {
 
     const tryAgain = document.createElement('a');
     tryAgain.textContent = "try again";
-    tryAgain.href = "page.html";
+    tryAgain.href = "options.html";
     tryAgain.classList.add('tryAgainLink')
     const parentDiv = document.getElementById('scoreContainer')
     parentDiv.appendChild(tryAgain);
@@ -179,4 +177,3 @@ function removeElement(elementID) {
     const target = document.getElementById(elementID);
     target.remove();
 }
-
