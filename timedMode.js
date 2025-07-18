@@ -167,7 +167,7 @@ function changeContent() {
 
     const tryAgain = document.createElement('a');
     tryAgain.textContent = "try again";
-    tryAgain.href = "options.html";
+    tryAgain.href = "index.html";
     tryAgain.classList.add('tryAgainLink')
     const parentDiv = document.getElementById('scoreContainer')
     parentDiv.appendChild(tryAgain);
