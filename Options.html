@@ -12,21 +12,31 @@
 
     <div class="form">
         <form>
+            <div>
+                <h1>Game of 24</h1>
+                <p>
+                    The game of 24 is a fast paced mathematical reasoning game where the goal is to correctly answer
+                    as many questions as possible within a chosen time limit. You are given 4 cards and the goal is to use
+                    basic arithmetic operators to obtain 24 using those 4 numbers.
+                </p>
+            </div>
+
+            <br/>
             <body>
                 <label for="duration">Duration:</label>
                 <select id="duration" name="duration">
-                    <option value="30">30</option>
-                    <option value="60">60</option>
-                    <option value="120">120</option>
+                    <option value="30">30s</option>
+                    <option value="60">60s</option>
+                    <option value="120">120s</option>
                 </select>
             </body>
-
         </form>
 
         <button id='startGame'>Start Game</button>
         <script>
-            localStorage.setItem('timedDuration', document.getElementById('duration').value);
             document.getElementById('startGame').onclick = function () {
+                var e = document.getElementById('duration');
+                localStorage.setItem('timedDuration', e.value);
                 location.href='timedModePage.html';
             };
         </script>
