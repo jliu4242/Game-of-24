@@ -26,4 +26,4 @@ or skipping a combination of cards.
 
 ### How to Play
 Select a time limit and then start the game. Type your answer into the provided bar and then submit your guess. If you don't believe it is possible to
-get 24 using the cards you were given, click impossible.
+get 24 using the cards you were given, click impossible. Player [GameOf24](https://jliu4242.github.io/Game-of-24/timedModePage.html) here
