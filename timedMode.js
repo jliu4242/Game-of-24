@@ -130,7 +130,8 @@ function checkValidCombination() {
 }
 
 function startTimer() {
-    var seconds = localStorage.getItem('timedDuration');
+    //var seconds = localStorage.getItem('timedDuration');
+    var seconds = 5;
     console.log(seconds);
 
     seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -157,11 +158,14 @@ function changeContent() {
     removeElement('input');
     removeElement('guess-button');
     removeElement('impossible-button');
+    removeElement('answerLabel');
+    removeElement('timer-section');
+    removeElement('score-section');
 
     const scoreBar = document.createElement('div');
     scoreBar.id = 'scoreContainer';
     scoreBar.textContent = "Score: " + score;
-    scoreBar.innerHTML += '<br>'
+    scoreBar.innerHTML += '<br/>'
     scoreBar.classList.add('scorebar-style');
     document.body.appendChild(scoreBar);
 
